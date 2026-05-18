@@ -28,7 +28,7 @@ export default function SignupPage() {
 
     // Clear individual errors when user types
     if (errors[id]) {
-      setErrors((prev) => ({ ...prev, [id]: "" }));
+      setErrors(() => ({ ...errors, [id]: "" }));
     }
   };
 
