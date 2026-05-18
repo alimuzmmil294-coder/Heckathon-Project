@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { LuStethoscope } from "react-icons/lu";
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
   // 1. Form States
@@ -19,10 +19,12 @@ export default function SignupPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const navigate = useNavigate();
+
   // 2. Input Change Handler
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
+    setFormData(() => ({ ...prev, [id]: value }));
 
     // Clear individual errors when user types
     if (errors[id]) {
@@ -38,13 +40,6 @@ export default function SignupPage() {
     if (!formData.name.trim()) {
       newErrors.name = "Full name is required";
     }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email address is required";
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
-    }
-
     if (!formData.password) {
       newErrors.password = "Password is required";
     } else if (formData.password.length < 6) {
@@ -64,11 +59,15 @@ export default function SignupPage() {
     setIsLoading(true);
 
     // Simulating API integration call
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsSuccess(true);
-      console.log("Account registered successfully:", formData);
-    }, 1800);
+    console.log("Account registered successfully:", formData);
+
+    if (formData.role === "Doctor") {
+      navigate("/doctor-dashboard");
+    } else if (formData.role === "Clinic Manager") {
+      navigate("/clinic-manager-dashboard");
+    } else {
+      navigate("/patient-dashboard");
+    }
   };
 
   return (
@@ -308,12 +307,12 @@ export default function SignupPage() {
               {/* Alternate route access pipeline node */}
               <div className="text-center text-sm text-gray-500 font-normal pt-1">
                 Already have one?{" "}
-                <a
-                  href="#signin"
+                <NavLink
+                  to="/login"
                   className="text-[#0091DC] hover:underline font-semibold transition-all"
                 >
                   Sign in
-                </a>
+                </NavLink>
               </div>
             </>
           )}

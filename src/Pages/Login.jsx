@@ -19,6 +19,10 @@ export default function LoginPage() {
   // 4. Submission Simulation Pipeline
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (formData.password || formData.email === "") {
+      alert("Please fill in all fields before submitting.");
+      return;
+    }
     console.log(formData);
 
     setFormData({ email: "", password: "" });
