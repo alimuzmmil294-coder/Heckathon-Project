@@ -24,12 +24,7 @@ export default function SignupPage() {
   // 2. Input Change Handler
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormData(() => ({ ...prev, [id]: value }));
-
-    // Clear individual errors when user types
-    if (errors[id]) {
-      setErrors(() => ({ ...errors, [id]: "" }));
-    }
+    setFormData(() => ({ ...formData, [id]: value }));
   };
 
   // 3. Validation Logic
