@@ -18,7 +18,6 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-
   const navigate = useNavigate();
 
   // 2. Input Change Handler
