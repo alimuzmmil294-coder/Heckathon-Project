@@ -1,100 +1,134 @@
-// @desc    Get metrics for Doctor Dashboard
+import Appointment from "../models/Appointment.js";
+import Patient from "../models/Patient.js";
+import Prescription from "../models/Prescription.js";
+
+// @desc    Get real-time metrics for Doctor Dashboard
 // @route   GET /api/doctor/stats
 export const getDoctorDashboardStats = async (req, res) => {
   try {
-    const stats = {
-      activePatients: 24,
-      appointmentsToday: 6,
-      pendingLabs: 3,
-      consultationsCompleted: 8,
-    };
-    res.json({ success: true, data: stats });
+    const patientCount = await Patient.countDocuments();
+    const appointmentsToday = await Appointment.countDocuments();
+    const completedCount = await Appointment.countDocuments({ status: "Completed" });
+    const inProgressCount = await Appointment.countDocuments({ status: "In Progress" });
+
+    res.json({
+      success: true,
+      data: {
+        activePatients: patientCount,
+        appointmentsToday: appointmentsToday,
+        pendingLabs: 2,
+        consultationsCompleted: completedCount,
+        inProgressCount,
+      },
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
 
-// @desc    Get doctor's daily appointment queue
+// @desc    Get doctor's live appointment queue from MongoDB
 // @route   GET /api/doctor/appointments
 export const getDoctorAppointments = async (req, res) => {
   try {
-    const queue = [
-      {
-        id: "APT-201",
-        patientName: "Emily Jenkins",
-        age: 29,
-        gender: "Female",
-        time: "09:00 AM",
-        type: "In-Person",
-        reason: "Acute migraine with visual aura",
-        status: "Completed",
-      },
-      {
-        id: "APT-202",
-        patientName: "Michael Chang",
-        age: 52,
-        gender: "Male",
-        time: "10:15 AM",
-        type: "Follow-up",
-        reason: "Hypertension management review",
-        status: "In Progress",
-      },
-      {
-        id: "APT-203",
-        patientName: "Sophia Martinez",
-        age: 38,
-        gender: "Female",
-        time: "11:30 AM",
-        type: "In-Person",
-        reason: "Persistent productive cough, fatigue (AI Copilot tested)",
-        status: "Confirmed",
-      },
-      {
-        id: "APT-204",
-        patientName: "David Kim",
-        age: 44,
-        gender: "Male",
-        time: "02:00 PM",
-        type: "Telehealth",
-        reason: "Routine lab results review",
-        status: "Confirmed",
-      },
-      {
-        id: "APT-205",
-        patientName: "Hannah Baker",
-        age: 21,
-        gender: "Female",
-        time: "03:15 PM",
-        type: "In-Person",
-        reason: "Allergic rhinitis & asthma inhaler refill",
-        status: "Confirmed",
-      },
-    ];
-    res.json({ success: true, count: queue.length, data: queue });
+    const appointments = await Appointment.find().sort({ createdAt: 1 });
+    res.json({
+      success: true,
+      count: appointments.length,
+      data: appointments.map((apt) => ({
+        id: apt._id,
+        patient: apt.patientName,
+        time: apt.time,
+        type: apt.type,
+        reason: apt.reason,
+        status: apt.status,
+        room: apt.notes || "Exam Room 1",
+      })),
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
 
-// @desc    Create structured e-prescription
+// @desc    Get registered patient records from MongoDB
+// @route   GET /api/doctor/patients
+export const getDoctorPatients = async (req, res) => {
+  try {
+    const patients = await Patient.find().sort({ fullName: 1 });
+    res.json({
+      success: true,
+      count: patients.length,
+      data: patients.map((pat) => ({
+        id: pat._id,
+        name: pat.fullName,
+        age: pat.age,
+        sex: pat.gender,
+        blood: pat.bloodGroup,
+        phone: pat.phone,
+        chronic: pat.chronicConditions && pat.chronicConditions.length > 0 ? pat.chronicConditions.join(", ") : "None",
+        allergies: pat.allergies && pat.allergies.length > 0 ? pat.allergies.join(", ") : "None",
+        vitals: pat.recentVitals,
+      })),
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// @desc    Get all prescriptions from MongoDB
+// @route   GET /api/doctor/prescriptions
+export const getDoctorPrescriptions = async (req, res) => {
+  try {
+    const prescriptions = await Prescription.find().sort({ createdAt: -1 });
+    res.json({
+      success: true,
+      count: prescriptions.length,
+      data: prescriptions.map((rx) => ({
+        id: rx._id,
+        patient: rx.patientName,
+        drug: rx.medications && rx.medications[0] ? `${rx.medications[0].name} (${rx.medications[0].dosage})` : "Prescribed Medication",
+        status: "Active",
+        date: rx.dateIssued,
+        medications: rx.medications,
+        aiExplanation: rx.aiPlainExplanation,
+      })),
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// @desc    Create structured e-prescription and persist to MongoDB
 // @route   POST /api/doctor/prescriptions
 export const createPrescription = async (req, res) => {
   try {
     const { patientName, diagnosis, medications, aiPlainExplanation } = req.body;
 
-    const newPrescription = {
-      id: `RX-${Math.floor(1000 + Math.random() * 9000)}`,
+    const formattedMeds = Array.isArray(medications)
+      ? medications
+      : [
+          {
+            name: medications || "Amoxicillin-Clavulanate",
+            dosage: "875/125 mg",
+            frequency: "Twice daily with meals",
+            duration: "7 days",
+            instructions: "Take with food",
+          },
+        ];
+
+    const newPrescription = await Prescription.create({
       patientName: patientName || "Patient",
       doctorName: "Dr. Sarah Mitchell, MD",
-      diagnosis: diagnosis || "Clinical Consultation",
-      medications: medications || [],
-      aiPlainExplanation: aiPlainExplanation || "Follow prescribed dosage instructions carefully.",
+      diagnosis: diagnosis || "Clinical Consultation & Treatment",
+      medications: formattedMeds,
+      aiPlainExplanation:
+        aiPlainExplanation ||
+        "Follow prescribed dosage instructions carefully. Complete the full course of treatment.",
       dateIssued: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
-    };
+    });
 
     res.status(201).json({
       success: true,
-      message: "E-Prescription generated successfully with AI clinical explanation",
+      message: "E-Prescription saved successfully in MongoDB with AI explanation",
       data: newPrescription,
     });
   } catch (error) {

@@ -3,18 +3,22 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import connectDB from "./config/db.js";
+import { seedDatabase } from "./config/seed.js";
 
 import authRoutes from "./routes/authRoutes.js";
 import patientRoutes from "./routes/patientRoutes.js";
 import doctorRoutes from "./routes/doctorRoutes.js";
 import aiRoutes from "./routes/aiRoutes.js";
+import managerRoutes from "./routes/managerRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 
-// Connect to MongoDB using environment credentials
-connectDB();
+// Connect to MongoDB and auto-seed initial clinical documents if empty
+connectDB().then(() => {
+  seedDatabase();
+});
 
 // Middleware
 app.use(
@@ -51,6 +55,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/patients", patientRoutes);
 app.use("/api/doctor", doctorRoutes);
 app.use("/api/ai", aiRoutes);
+app.use("/api/manager", managerRoutes);
 
 // Fallback 404 handler
 app.use((req, res) => {
