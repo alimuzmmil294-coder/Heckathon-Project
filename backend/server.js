@@ -23,9 +23,14 @@ connectDB().then(() => {
 // Middleware
 app.use(
   cors({
-    origin: [CLIENT_URL, "http://localhost:5173", "http://127.0.0.1:5173"],
+    origin: [
+      CLIENT_URL,
+      "http://localhost:5173",
+      "http://127.0.0.1:5173",
+      "https://heckathon-project-dsfo.vercel.app/",
+    ],
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -36,14 +41,15 @@ app.get("/api/health", (req, res) => {
     mongoose.connection.readyState === 1
       ? "connected"
       : mongoose.connection.readyState === 2
-      ? "connecting"
-      : "disconnected";
+        ? "connecting"
+        : "disconnected";
 
   res.json({
     status: "healthy",
     service: "MedFlow Core Clinical API",
     database: dbStatus,
-    activeDbName: mongoose.connection.name || process.env.MONGO_DB_NAME || "medflow",
+    activeDbName:
+      mongoose.connection.name || process.env.MONGO_DB_NAME || "medflow",
     environment: process.env.NODE_ENV || "development",
     uptime: `${Math.floor(process.uptime())}s`,
     timestamp: new Date().toISOString(),
@@ -59,7 +65,9 @@ app.use("/api/manager", managerRoutes);
 
 // Fallback 404 handler
 app.use((req, res) => {
-  res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
+  res
+    .status(404)
+    .json({ success: false, message: `Route ${req.originalUrl} not found` });
 });
 
 // Global Error Handler
@@ -72,7 +80,9 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 [MedFlow Backend] Server running on http://localhost:${PORT}`);
+  console.log(
+    `🚀 [MedFlow Backend] Server running on http://localhost:${PORT}`,
+  );
   console.log(`🔒 [MedFlow Backend] Accepting requests from: ${CLIENT_URL}`);
 });
 
