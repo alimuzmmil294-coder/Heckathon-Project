@@ -27,7 +27,7 @@ app.use(
       CLIENT_URL,
       "http://localhost:5173",
       "http://127.0.0.1:5173",
-      "https://heckathon-project-dsfo.vercel.app/",
+      "https://heckathon-project-dsfo.vercel.app",
     ],
     credentials: true,
   }),
