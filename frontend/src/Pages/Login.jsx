@@ -38,15 +38,20 @@ export default function LoginPage() {
       const user = res?.user || { name, email, role };
       localStorage.setItem("medflow_user", JSON.stringify(user));
 
-      if (role === "Doctor") navigate("/doctor-dashboard");
-      else if (role === "Clinic Manager") navigate("/clinic-manager-dashboard");
+      const targetRole = (res?.user?.role || role || "")
+        .toLowerCase()
+        .replace(/\s+/g, "_");
+
+      if (targetRole === "doctor") navigate("/doctor-dashboard");
+      else if (targetRole === "clinic_manager") navigate("/clinic-manager-dashboard");
       else navigate("/patient-dashboard");
     } catch {
       // Graceful fallback for offline demo session
       const fallbackUser = { name, email, role };
       localStorage.setItem("medflow_user", JSON.stringify(fallbackUser));
-      if (role === "Doctor") navigate("/doctor-dashboard");
-      else if (role === "Clinic Manager") navigate("/clinic-manager-dashboard");
+      const targetRole = (role || "").toLowerCase().replace(/\s+/g, "_");
+      if (targetRole === "doctor") navigate("/doctor-dashboard");
+      else if (targetRole === "clinic_manager") navigate("/clinic-manager-dashboard");
       else navigate("/patient-dashboard");
     } finally {
       setIsLoading(false);
@@ -90,10 +95,13 @@ export default function LoginPage() {
 
       localStorage.setItem("medflow_user", JSON.stringify(userSession));
 
-      const targetRole = res?.user?.role || formData.role;
-      if (targetRole === "Doctor") {
+      const targetRole = (res?.user?.role || formData.role || "")
+        .toLowerCase()
+        .replace(/\s+/g, "_");
+
+      if (targetRole === "doctor") {
         navigate("/doctor-dashboard");
-      } else if (targetRole === "Clinic Manager") {
+      } else if (targetRole === "clinic_manager") {
         navigate("/clinic-manager-dashboard");
       } else {
         navigate("/patient-dashboard");

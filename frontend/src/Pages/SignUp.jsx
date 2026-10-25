@@ -79,9 +79,13 @@ export default function SignupPage() {
 
       localStorage.setItem("medflow_user", JSON.stringify(userSession));
 
-      if (formData.role === "Doctor") {
+      const targetRole = (res?.user?.role || formData.role || "")
+        .toLowerCase()
+        .replace(/\s+/g, "_");
+
+      if (targetRole === "doctor") {
         navigate("/doctor-dashboard");
-      } else if (formData.role === "Clinic Manager") {
+      } else if (targetRole === "clinic_manager") {
         navigate("/clinic-manager-dashboard");
       } else {
         navigate("/patient-dashboard");

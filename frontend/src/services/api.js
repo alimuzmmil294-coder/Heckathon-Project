@@ -2,17 +2,43 @@ const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
 
 /**
- * Universal safe fetch wrapper with error handling and fallback support
+ * Universal safe fetch wrapper with error handling, JWT auth attachment, and fallback support
  */
 async function fetchFromApi(endpoint, options = {}) {
   try {
+    const token =
+      typeof window !== "undefined"
+        ? localStorage.getItem("medflow_token")
+        : null;
+
+    const headers = {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...options.headers,
+    };
+
     const res = await fetch(`${API_BASE_URL}${endpoint}`, {
-      headers: {
-        "Content-Type": "application/json",
-        ...options.headers,
-      },
       ...options,
+      headers,
     });
+
+    // Handle 401 Unauthorized by clearing stale tokens & redirecting
+    if (
+      res.status === 401 &&
+      !endpoint.startsWith("/auth/login") &&
+      !endpoint.startsWith("/auth/register")
+    ) {
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("medflow_token");
+        localStorage.removeItem("medflow_user");
+        if (
+          window.location.pathname !== "/login" &&
+          window.location.pathname !== "/signup"
+        ) {
+          window.location.href = "/login";
+        }
+      }
+    }
 
     const data = await res.json();
     if (!res.ok) {
@@ -40,6 +66,10 @@ export const registerApi = async (userData) => {
     method: "POST",
     body: JSON.stringify(userData),
   });
+};
+
+export const getCurrentUserApi = async () => {
+  return await fetchFromApi("/auth/me");
 };
 
 // ==========================================

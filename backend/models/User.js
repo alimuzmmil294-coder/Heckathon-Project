@@ -22,8 +22,16 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["Doctor", "Patient", "Clinic Manager", "Receptionist"],
-      default: "Patient",
+      enum: ["patient", "doctor", "clinic_manager", "receptionist"],
+      default: "patient",
+      trim: true,
+      lowercase: true,
+      set: (val) => {
+        if (!val) return "patient";
+        const normalized = String(val).trim().toLowerCase().replace(/\s+/g, "_");
+        if (normalized === "manager") return "clinic_manager";
+        return normalized;
+      },
     },
     phone: {
       type: String,

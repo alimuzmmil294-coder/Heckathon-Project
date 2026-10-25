@@ -35,8 +35,22 @@ const SideBarD = ({ activeTab = "overview", setActiveTab, mobileOpen, setMobileO
     return "dr.mitchell@clinic.com";
   });
 
+  const [userRole] = useState(() => {
+    try {
+      const saved = localStorage.getItem("medflow_user");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.role) return parsed.role;
+      }
+    } catch (e) {
+      console.warn("Could not read user state", e);
+    }
+    return "Doctor";
+  });
+
   const handleSignOut = () => {
     localStorage.removeItem("medflow_user");
+    localStorage.removeItem("medflow_token");
     navigate("/login");
   };
 
@@ -130,7 +144,7 @@ const SideBarD = ({ activeTab = "overview", setActiveTab, mobileOpen, setMobileO
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs font-semibold text-white truncate">{userName}</p>
-              <p className="text-[10px] text-slate-400 truncate">{userEmail}</p>
+              <p className="text-[10px] text-slate-400 truncate">{userRole} &middot; {userEmail}</p>
             </div>
           </div>
 

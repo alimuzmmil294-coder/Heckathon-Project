@@ -7,31 +7,35 @@ import Staff from "../models/Staff.js";
 export const seedDatabase = async () => {
   try {
     // 1. Seed Users if empty
-    const userCount = await User.countDocuments();
-    if (userCount === 0) {
-      console.log("🌱 [Seed] Seeding initial users into MongoDB...");
-      await User.create([
-        {
-          name: "Dr. Sarah Mitchell",
-          email: "dr.mitchell@clinic.com",
-          password: "password123",
-          role: "Doctor",
-          specialty: "General Internal Medicine",
-        },
-        {
-          name: "Alex Rivera",
-          email: "alex.rivera@patient.com",
-          password: "password123",
-          role: "Patient",
-        },
-        {
-          name: "Director Davis",
-          email: "admin@medflow.com",
-          password: "password123",
-          role: "Clinic Manager",
-        },
-      ]);
-      console.log("✅ [Seed] Users seeded successfully.");
+    // 1. Seed or Verify Demo Users
+    const demoAccounts = [
+      {
+        name: "Dr. Sarah Mitchell",
+        email: "dr.mitchell@clinic.com",
+        password: "password123",
+        role: "doctor",
+        specialty: "General Internal Medicine",
+      },
+      {
+        name: "Alex Rivera",
+        email: "alex.rivera@patient.com",
+        password: "password123",
+        role: "patient",
+      },
+      {
+        name: "Director Davis",
+        email: "admin@medflow.com",
+        password: "password123",
+        role: "clinic_manager",
+      },
+    ];
+
+    for (const acc of demoAccounts) {
+      const exists = await User.findOne({ email: acc.email });
+      if (!exists) {
+        await User.create(acc);
+        console.log(`✅ [Seed] Demo user ${acc.email} provisioned successfully.`);
+      }
     }
 
     // 2. Seed Patients if empty
