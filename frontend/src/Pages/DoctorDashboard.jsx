@@ -237,7 +237,7 @@ const DoctorDashboard = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-neutral-50 text-neutral-900">
+    <div className="flex min-h-screen bg-slate-50 text-slate-900">
       {/* Responsive Sidebar */}
       <SideBarD
         activeTab={activeTab}
@@ -249,24 +249,24 @@ const DoctorDashboard = () => {
       {/* Main Content Area */}
       <main className="flex-1 min-w-0 w-full overflow-x-hidden flex flex-col">
         {/* Top Header Bar */}
-        <header className="bg-white border-b border-neutral-200 px-4 sm:px-6 py-3.5 flex items-center justify-between sticky top-0 z-30">
+        <header className="bg-white border-b border-slate-200 px-4 sm:px-6 py-3.5 flex items-center justify-between sticky top-0 z-30 shadow-xs">
           <div className="flex items-center gap-3 min-w-0">
             {/* Hamburger Button: visible on < 1024px */}
             <button
               onClick={() => setMobileOpen(true)}
-              className="lg:hidden text-neutral-700 p-2 rounded-lg border border-neutral-200 hover:bg-neutral-50 cursor-pointer shrink-0"
+              className="lg:hidden text-slate-700 p-2 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer shrink-0"
               aria-label="Open Sidebar Menu"
             >
               <LuMenu size={18} />
             </button>
             <div className="truncate">
-              <h1 className="text-base sm:text-lg font-bold text-neutral-900 tracking-tight leading-tight truncate">
+              <h1 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight leading-tight truncate">
                 Doctor Workspace
               </h1>
-              <p className="text-[11px] text-neutral-500 flex items-center gap-2 truncate">
+              <p className="text-[11px] text-slate-500 flex items-center gap-2 truncate">
                 <span>
                   Clinic:{" "}
-                  <strong className="text-neutral-700 font-medium">
+                  <strong className="text-slate-700 font-medium">
                     MedFlow Central
                   </strong>
                 </span>
@@ -283,13 +283,13 @@ const DoctorDashboard = () => {
             <button
               onClick={fetchDashboardData}
               disabled={loading}
-              className="bg-white hover:bg-neutral-50 text-neutral-700 border border-neutral-200 rounded-lg text-xs font-medium h-9 px-3 gap-2 inline-flex items-center shadow-xs whitespace-nowrap shrink-0 cursor-pointer"
+              className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-lg text-xs font-semibold h-9 px-3 gap-2 inline-flex items-center shadow-xs whitespace-nowrap shrink-0 cursor-pointer"
               title="Refresh live data"
             >
               <LuRefreshCw
                 size={14}
                 className={
-                  loading ? "animate-spin text-neutral-600" : "text-neutral-500"
+                  loading ? "animate-spin text-blue-600" : "text-slate-500"
                 }
               />
               <span className="hidden sm:inline">Refresh</span>
@@ -300,9 +300,9 @@ const DoctorDashboard = () => {
                 setActiveTab("ai");
                 if (!aiResult) handleRunAiAnalysis();
               }}
-              className="bg-white hover:bg-neutral-50 text-neutral-700 border border-neutral-200 rounded-lg text-xs font-medium h-9 px-3.5 gap-2 inline-flex items-center shadow-xs whitespace-nowrap shrink-0 cursor-pointer"
+              className="bg-blue-50 hover:bg-blue-100 text-[#0091DC] border border-blue-200 rounded-lg text-xs font-semibold h-9 px-3.5 gap-2 inline-flex items-center shadow-xs whitespace-nowrap shrink-0 cursor-pointer transition-colors"
             >
-              <LuSparkles size={14} className="text-neutral-500" />
+              <LuSparkles size={14} className="text-[#0091DC]" />
               <span>AI Copilot</span>
             </button>
 
@@ -311,7 +311,7 @@ const DoctorDashboard = () => {
                 setSelectedPatient("Sophia Martinez");
                 setShowPrescriptionModal(true);
               }}
-              className="bg-neutral-900 hover:bg-neutral-800 text-white rounded-lg text-xs font-medium h-9 px-4 gap-2 inline-flex items-center shadow-xs whitespace-nowrap shrink-0 cursor-pointer"
+              className="bg-[#0092E1] hover:bg-[#0077B6] text-white rounded-lg text-xs font-semibold h-9 px-4 gap-2 inline-flex items-center shadow-sm whitespace-nowrap shrink-0 cursor-pointer transition-colors"
             >
               <LuFileText size={14} />
               <span>+ New Rx</span>
@@ -321,14 +321,14 @@ const DoctorDashboard = () => {
 
         {/* Optional Error Banner */}
         {error && (
-          <div className="mx-4 sm:mx-6 mt-4 p-3 bg-neutral-100 border border-neutral-300 rounded-xl text-neutral-800 text-xs flex items-center justify-between">
+          <div className="mx-4 sm:mx-6 mt-4 p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-800 text-xs flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <LuCircleAlert size={16} className="text-neutral-600 shrink-0" />
+              <LuCircleAlert size={16} className="text-rose-600 shrink-0" />
               <span>{error}</span>
             </div>
             <button
               onClick={fetchDashboardData}
-              className="px-2.5 py-1 bg-white border border-neutral-300 hover:bg-neutral-50 text-neutral-800 rounded text-xs font-medium cursor-pointer"
+              className="px-2.5 py-1 bg-white border border-rose-200 hover:bg-rose-50 text-rose-800 rounded text-xs font-semibold cursor-pointer"
             >
               Retry
             </button>
@@ -340,120 +340,108 @@ const DoctorDashboard = () => {
           {/* TAB 1: OVERVIEW */}
           {activeTab === "overview" && (
             <>
-              {/* Standardized Summary KPI Metric Cards */}
+              {/* Summary KPI Metric Cards (Rich Medical Blue Theme) */}
               <div
                 className="grid grid-cols-2 lg:grid-cols-4 w-full"
                 style={{ gap: "16px", marginBottom: "20px" }}
               >
                 <div
-                  className="bg-white border border-neutral-200 rounded-xl shadow-xs flex items-center justify-between"
+                  className="bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-between"
                   style={{ padding: "18px 20px" }}
                 >
                   <div className="min-w-0 pr-2">
-                    <p className="text-[11px] font-semibold uppercase tracking-wider text-neutral-500 whitespace-nowrap truncate">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 whitespace-nowrap truncate">
                       Active Patients
                     </p>
-                    <p className="text-2xl font-bold text-neutral-900 tracking-tight whitespace-nowrap mt-1">
+                    <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight whitespace-nowrap mt-1">
                       {loading ? "..." : stats.activePatients}
                     </p>
-                    <span className="text-[11px] text-emerald-600 font-medium">
+                    <span className="text-[11px] text-blue-600 font-semibold">
                       Database records
                     </span>
                   </div>
-                  <div
-                    className="rounded-lg bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-600 shrink-0"
-                    style={{ width: "38px", height: "38px" }}
-                  >
-                    <BsPeopleFill size={18} />
+                  <div className="w-11 h-11 rounded-xl bg-blue-50 text-[#0091DC] border border-blue-100 flex items-center justify-center shrink-0">
+                    <BsPeopleFill size={20} />
                   </div>
                 </div>
 
                 <div
-                  className="bg-white border border-neutral-200 rounded-xl shadow-xs flex items-center justify-between"
+                  className="bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-between"
                   style={{ padding: "18px 20px" }}
                 >
                   <div className="min-w-0 pr-2">
-                    <p className="text-[11px] font-semibold uppercase tracking-wider text-neutral-500 whitespace-nowrap truncate">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 whitespace-nowrap truncate">
                       Appointments Today
                     </p>
-                    <p className="text-2xl font-bold text-neutral-900 tracking-tight whitespace-nowrap mt-1">
+                    <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight whitespace-nowrap mt-1">
                       {loading
                         ? "..."
                         : appointments.length > 0
                           ? appointments.length
                           : stats.appointmentsToday}
                     </p>
-                    <span className="text-[11px] text-neutral-600 font-medium">
+                    <span className="text-[11px] text-emerald-600 font-semibold">
                       Active in queue
                     </span>
                   </div>
-                  <div
-                    className="rounded-lg bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-600 shrink-0"
-                    style={{ width: "38px", height: "38px" }}
-                  >
-                    <FaCalendarCheck size={17} />
+                  <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center shrink-0">
+                    <FaCalendarCheck size={19} />
                   </div>
                 </div>
 
                 <div
-                  className="bg-white border border-neutral-200 rounded-xl shadow-xs flex items-center justify-between"
+                  className="bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-between"
                   style={{ padding: "18px 20px" }}
                 >
                   <div className="min-w-0 pr-2">
-                    <p className="text-[11px] font-semibold uppercase tracking-wider text-neutral-500 whitespace-nowrap truncate">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 whitespace-nowrap truncate">
                       Pending Labs
                     </p>
-                    <p className="text-2xl font-bold text-neutral-900 tracking-tight whitespace-nowrap mt-1">
+                    <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight whitespace-nowrap mt-1">
                       {stats.pendingLabs}
                     </p>
-                    <span className="text-[11px] text-amber-700 font-medium">
+                    <span className="text-[11px] text-amber-600 font-semibold">
                       1 Critical X-Ray
                     </span>
                   </div>
-                  <div
-                    className="rounded-lg bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-600 shrink-0"
-                    style={{ width: "38px", height: "38px" }}
-                  >
-                    <LuActivity size={18} />
+                  <div className="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 border border-amber-100 flex items-center justify-center shrink-0">
+                    <LuActivity size={20} />
                   </div>
                 </div>
 
                 <div
-                  className="bg-white border border-neutral-200 rounded-xl shadow-xs flex items-center justify-between"
+                  className="bg-white border border-slate-200 rounded-xl shadow-sm flex items-center justify-between"
                   style={{ padding: "18px 20px" }}
                 >
                   <div className="min-w-0 pr-2">
-                    <p className="text-[11px] font-semibold uppercase tracking-wider text-neutral-500 whitespace-nowrap truncate">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 whitespace-nowrap truncate">
                       Consultations
                     </p>
-                    <p className="text-2xl font-bold text-neutral-900 tracking-tight whitespace-nowrap mt-1">
+                    <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight whitespace-nowrap mt-1">
                       {stats.consultationsCompleted}
                     </p>
-                    <span className="text-[11px] text-neutral-500 font-medium">
+                    <span className="text-[11px] text-purple-600 font-semibold">
                       Avg 14 mins
                     </span>
                   </div>
-                  <div
-                    className="rounded-lg bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-600 shrink-0"
-                    style={{ width: "38px", height: "38px" }}
-                  >
-                    <FaUserDoctor size={17} />
+                  <div className="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 border border-purple-100 flex items-center justify-center shrink-0">
+                    <FaUserDoctor size={19} />
                   </div>
                 </div>
               </div>
 
-              {/* AI Copilot Showcase Feature Banner (Neutral Dark Enterprise) */}
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-5 sm:p-6 text-white shadow-xs">
+              {/* AI Copilot Showcase Feature Banner (Signature Deep Navy & Cyan) */}
+              <div className="bg-[#0B2545] rounded-xl p-5 sm:p-6 text-white shadow-md border border-slate-700/50">
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
                   <div className="space-y-1.5 max-w-2xl">
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-neutral-800 text-neutral-300 text-[11px] font-medium border border-neutral-700">
-                      <LuSparkles size={13} className="text-neutral-400" />
-                      <span>Clinical Intelligence Assist</span>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-400/20 text-cyan-300 text-xs font-semibold border border-cyan-400/30">
+                      <LuSparkles size={13} />
+                      <span>Next-Generation Clinical AI</span>
                     </div>
                     <h2 className="text-lg sm:text-xl font-bold tracking-tight text-white">
                       AI Clinical Copilot for Differential Diagnosis
                     </h2>
-                    <p className="text-xs text-neutral-400 leading-relaxed">
+                    <p className="text-xs text-slate-300 leading-relaxed">
                       Enter clinical symptoms to generate ranked differential
                       diagnoses, protocol lab tests, and urgent red flags
                       calibrated for primary care.
@@ -464,7 +452,7 @@ const DoctorDashboard = () => {
                       setActiveTab("ai");
                       if (!aiResult) handleRunAiAnalysis();
                     }}
-                    className="bg-white hover:bg-neutral-100 text-neutral-900 rounded-lg text-xs font-semibold h-9 px-4 gap-2 inline-flex items-center shadow-xs whitespace-nowrap shrink-0 cursor-pointer"
+                    className="bg-[#0092E1] hover:bg-[#0077B6] text-white rounded-lg text-xs font-semibold h-9 px-4 gap-2 inline-flex items-center shadow-md whitespace-nowrap shrink-0 cursor-pointer transition-colors"
                   >
                     <LuBrain size={16} />
                     <span>Open AI Copilot</span>
@@ -473,35 +461,35 @@ const DoctorDashboard = () => {
               </div>
 
               {/* Today's Schedule Table */}
-              <div className="bg-white rounded-xl border border-neutral-200 shadow-xs overflow-hidden">
-                <div className="p-4 sm:p-5 border-b border-neutral-200 flex items-center justify-between">
+              <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                <div className="p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between">
                   <div>
-                    <h3 className="text-sm sm:text-base font-bold text-neutral-900">
+                    <h3 className="text-sm sm:text-base font-bold text-slate-900">
                       Today's Patient Schedule
                     </h3>
-                    <p className="text-xs text-neutral-500">
+                    <p className="text-xs text-slate-500">
                       Real-time clinical queue from MongoDB Atlas
                     </p>
                   </div>
-                  <span className="bg-neutral-100 text-neutral-700 border border-neutral-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap">
+                  <span className="bg-blue-50 text-[#0091DC] border border-blue-200 rounded-full text-xs font-semibold px-3 py-1 whitespace-nowrap">
                     {appointments.length} Visits Scheduled
                   </span>
                 </div>
 
                 {loading ? (
-                  <div className="p-10 text-center text-neutral-500 text-xs">
-                    <LuRefreshCw className="animate-spin inline-block mr-2" />{" "}
+                  <div className="p-10 text-center text-slate-500 text-xs">
+                    <LuRefreshCw className="animate-spin inline-block mr-2 text-blue-600" />{" "}
                     Loading appointments from MongoDB...
                   </div>
                 ) : appointments.length === 0 ? (
-                  <div className="p-8 text-center text-neutral-400 text-xs">
+                  <div className="p-8 text-center text-slate-400 text-xs">
                     No appointments scheduled for today.
                   </div>
                 ) : (
                   /* Contained Table Scrolling */
                   <div className="w-full overflow-x-auto">
                     <table className="w-full min-w-[850px] border-collapse text-left text-xs">
-                      <thead className="bg-neutral-50 text-neutral-600 text-[11px] font-semibold uppercase tracking-wider border-b border-neutral-200">
+                      <thead className="bg-slate-50 text-slate-600 text-[11px] font-semibold uppercase tracking-wider border-b border-slate-200">
                         <tr>
                           <th className="py-3 px-4">Time</th>
                           <th className="py-3 px-4">Patient Name</th>
@@ -513,38 +501,38 @@ const DoctorDashboard = () => {
                           <th className="py-3 px-4 text-right">Actions</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-neutral-100 text-neutral-700">
+                      <tbody className="divide-y divide-slate-100 text-slate-700">
                         {appointments.map((apt) => (
                           <tr
                             key={apt.id}
-                            className="hover:bg-neutral-50/70 transition-colors"
+                            className="hover:bg-slate-50/80 transition-colors"
                           >
-                            <td className="py-3 px-4 font-semibold text-neutral-900 whitespace-nowrap">
+                            <td className="py-3 px-4 font-semibold text-slate-900 whitespace-nowrap">
                               {apt.time}
                             </td>
-                            <td className="py-3 px-4 font-medium text-neutral-900">
+                            <td className="py-3 px-4 font-medium text-slate-900">
                               {apt.patient}
-                              <span className="block text-[11px] text-neutral-400 font-normal">
+                              <span className="block text-[11px] text-slate-400 font-normal">
                                 {apt.room}
                               </span>
                             </td>
                             <td className="py-3 px-4">
-                              <span className="bg-neutral-100 text-neutral-700 border border-neutral-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap">
+                              <span className="bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap">
                                 {apt.type}
                               </span>
                             </td>
-                            <td className="py-3 px-4 text-neutral-600 max-w-xs truncate">
+                            <td className="py-3 px-4 text-slate-600 max-w-xs truncate">
                               {apt.reason}
                             </td>
                             <td className="py-3 px-4">
                               <span
-                                className={
+                                className={`text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap ${
                                   apt.status === "Completed"
-                                    ? "bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap"
+                                    ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
                                     : apt.status === "In Progress"
-                                      ? "bg-amber-50 text-amber-800 border border-amber-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap"
-                                      : "bg-neutral-100 text-neutral-700 border border-neutral-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap"
-                                }
+                                      ? "bg-amber-50 text-amber-700 border border-amber-200"
+                                      : "bg-blue-50 text-[#0091DC] border border-blue-200"
+                                }`}
                               >
                                 {apt.status}
                               </span>
@@ -555,9 +543,9 @@ const DoctorDashboard = () => {
                                   setSelectedPatient(apt.patient);
                                   setShowPrescriptionModal(true);
                                 }}
-                                className="h-7 px-2.5 text-xs font-medium text-neutral-700 hover:bg-neutral-100 rounded-md inline-flex items-center whitespace-nowrap cursor-pointer"
+                                className="text-xs font-bold text-[#0091DC] hover:text-[#0077B6] hover:underline cursor-pointer inline-flex items-center gap-1"
                               >
-                                Write Rx
+                                Write Rx &rarr;
                               </button>
                             </td>
                           </tr>
@@ -577,20 +565,17 @@ const DoctorDashboard = () => {
               activeTab !== "appointments" &&
               activeTab !== "prescriptions")) && (
             <div className="space-y-6">
-              <div className="bg-white rounded-xl border border-neutral-200 p-5 sm:p-6 shadow-xs">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-neutral-200 gap-4">
+              <div className="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 gap-4">
                   <div className="flex items-center gap-3">
-                    <div
-                      className="rounded-lg bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-600 shrink-0"
-                      style={{ width: "38px", height: "38px" }}
-                    >
-                      <LuBrain size={20} />
+                    <div className="w-10 h-10 rounded-xl bg-cyan-50 border border-cyan-100 flex items-center justify-center text-cyan-600 shrink-0">
+                      <LuBrain size={22} />
                     </div>
                     <div>
-                      <h2 className="text-base sm:text-lg font-bold text-neutral-900 tracking-tight">
+                      <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
                         MedFlow AI Clinical Copilot
                       </h2>
-                      <p className="text-xs text-neutral-500">
+                      <p className="text-xs text-slate-500">
                         Evidence-based differential diagnosis and recommended
                         workup support
                       </p>
@@ -599,14 +584,14 @@ const DoctorDashboard = () => {
 
                   {/* Preset Case Buttons */}
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-xs font-semibold text-neutral-400">
+                    <span className="text-xs font-semibold text-slate-400">
                       Quick Test Cases:
                     </span>
                     {SAMPLE_CASES.map((sc, i) => (
                       <button
                         key={i}
                         onClick={() => handleQuickLoadCase(sc)}
-                        className="bg-white hover:bg-neutral-50 text-neutral-700 border border-neutral-200 rounded-md text-xs font-medium h-7 px-2.5 inline-flex items-center shadow-xs whitespace-nowrap cursor-pointer"
+                        className="bg-blue-50 hover:bg-blue-100 text-[#0091DC] border border-blue-200 rounded-lg text-xs font-semibold h-7 px-2.5 inline-flex items-center shadow-xs whitespace-nowrap cursor-pointer transition-colors"
                       >
                         {sc.label.split(":")[0]}
                       </button>
@@ -617,7 +602,7 @@ const DoctorDashboard = () => {
                 {/* Input Area */}
                 <div className="mt-5 space-y-4">
                   <div>
-                    <label className="block text-[11px] font-semibold uppercase tracking-wider text-neutral-600 mb-1.5">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                       Patient Clinical History & Presenting Symptoms
                     </label>
                     <textarea
@@ -625,19 +610,19 @@ const DoctorDashboard = () => {
                       value={symptomInput}
                       onChange={(e) => setSymptomInput(e.target.value)}
                       placeholder="Describe patient's age, chief complaint, duration, auscultation findings, and vitals..."
-                      className="w-full p-3 text-xs border border-neutral-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-all text-neutral-800"
+                      className="w-full p-3 text-xs border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0092E1] transition-all text-slate-800"
                     />
                   </div>
 
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <p className="text-[11px] text-neutral-400">
+                    <p className="text-[11px] text-slate-400">
                       🔒 HIPAA Compliant &middot; Live backend analysis &middot;
                       Clinical advisory decision support
                     </p>
                     <button
                       onClick={handleRunAiAnalysis}
                       disabled={isAiLoading}
-                      className="bg-neutral-900 hover:bg-neutral-800 text-white rounded-lg text-xs font-medium h-9 px-4 gap-2 inline-flex items-center shadow-xs whitespace-nowrap shrink-0 cursor-pointer disabled:opacity-60"
+                      className="bg-[#0092E1] hover:bg-[#0077B6] text-white rounded-lg text-xs font-semibold h-9 px-4 gap-2 inline-flex items-center shadow-md whitespace-nowrap shrink-0 cursor-pointer disabled:opacity-60 transition-colors"
                     >
                       {isAiLoading ? (
                         <>
@@ -660,13 +645,13 @@ const DoctorDashboard = () => {
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {/* Column 1: Differentials */}
-                    <div className="bg-white rounded-xl border border-neutral-200 p-5 shadow-xs space-y-4">
+                    <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
                       <div className="flex items-center justify-between">
-                        <h3 className="font-bold text-neutral-900 text-xs uppercase tracking-wider flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-neutral-900" />
+                        <h3 className="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-[#0092E1]" />
                           Differential Diagnosis
                         </h3>
-                        <span className="bg-neutral-100 text-neutral-700 border border-neutral-200 rounded-md text-[11px] font-medium px-2 py-0.5 whitespace-nowrap">
+                        <span className="bg-blue-50 text-[#0091DC] border border-blue-200 rounded-full text-[10px] font-bold px-2 py-0.5 whitespace-nowrap">
                           Ranked
                         </span>
                       </div>
@@ -675,19 +660,19 @@ const DoctorDashboard = () => {
                         {aiResult.differentials.map((diff, i) => (
                           <div
                             key={i}
-                            className="p-3 rounded-lg border border-neutral-200 bg-neutral-50/70 space-y-1.5"
+                            className="p-3 rounded-lg border border-slate-200 bg-slate-50/70 space-y-1.5"
                           >
                             <div className="flex justify-between items-center text-xs">
-                              <span className="font-semibold text-neutral-900">
+                              <span className="font-bold text-slate-900">
                                 {diff.name}
                               </span>
-                              <span className="text-neutral-900 font-bold">
+                              <span className="text-[#0091DC] font-extrabold">
                                 {diff.prob}
                               </span>
                             </div>
-                            <div className="w-full bg-neutral-200 h-1.5 rounded-full overflow-hidden">
+                            <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
                               <div
-                                className="bg-neutral-800 h-full rounded-full"
+                                className="bg-[#0092E1] h-full rounded-full"
                                 style={{ width: diff.prob }}
                               />
                             </div>
@@ -697,13 +682,13 @@ const DoctorDashboard = () => {
                     </div>
 
                     {/* Column 2: Recommended Diagnostic Tests */}
-                    <div className="bg-white rounded-xl border border-neutral-200 p-5 shadow-xs space-y-4">
+                    <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
                       <div className="flex items-center justify-between">
-                        <h3 className="font-bold text-neutral-900 text-xs uppercase tracking-wider flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-neutral-600" />
+                        <h3 className="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-[#0091DC]" />
                           Recommended Workup
                         </h3>
-                        <span className="bg-neutral-100 text-neutral-700 border border-neutral-200 rounded-md text-[11px] font-medium px-2 py-0.5 whitespace-nowrap">
+                        <span className="bg-blue-50 text-[#0091DC] border border-blue-200 rounded-full text-[10px] font-bold px-2 py-0.5 whitespace-nowrap">
                           Protocol
                         </span>
                       </div>
@@ -712,11 +697,11 @@ const DoctorDashboard = () => {
                         {aiResult.tests.map((test, i) => (
                           <li
                             key={i}
-                            className="flex items-start gap-2 text-xs text-neutral-700 bg-neutral-50 p-2.5 rounded-lg border border-neutral-200"
+                            className="flex items-start gap-2 text-xs text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-200"
                           >
                             <FaCircleCheck
                               size={14}
-                              className="text-neutral-600 shrink-0 mt-0.5"
+                              className="text-[#0091DC] shrink-0 mt-0.5"
                             />
                             <span>{test}</span>
                           </li>
@@ -725,13 +710,13 @@ const DoctorDashboard = () => {
                     </div>
 
                     {/* Column 3: Red Flags */}
-                    <div className="bg-white rounded-xl border border-neutral-200 p-5 shadow-xs space-y-4">
+                    <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
                       <div className="flex items-center justify-between">
-                        <h3 className="font-bold text-neutral-900 text-xs uppercase tracking-wider flex items-center gap-2">
+                        <h3 className="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
                           <span className="w-2 h-2 rounded-full bg-rose-500" />
                           Clinical Red Flags
                         </h3>
-                        <span className="bg-rose-50 text-rose-700 border border-rose-200 rounded-md text-[11px] font-medium px-2 py-0.5 whitespace-nowrap">
+                        <span className="bg-rose-50 text-rose-700 border border-rose-200 rounded-full text-[10px] font-bold px-2 py-0.5 whitespace-nowrap">
                           Urgent
                         </span>
                       </div>
@@ -740,7 +725,7 @@ const DoctorDashboard = () => {
                         {aiResult.redFlags.map((flag, i) => (
                           <li
                             key={i}
-                            className="text-xs text-rose-800 bg-rose-50/60 p-2.5 rounded-lg border border-rose-200 font-medium"
+                            className="text-xs text-rose-800 bg-rose-50/70 p-2.5 rounded-lg border border-rose-200 font-medium"
                           >
                             &bull; {flag}
                           </li>
@@ -753,7 +738,7 @@ const DoctorDashboard = () => {
                             setSelectedPatient("Sophia Martinez");
                             setShowPrescriptionModal(true);
                           }}
-                          className="w-full bg-neutral-900 hover:bg-neutral-800 text-white rounded-lg text-xs font-medium h-9 px-4 gap-2 inline-flex items-center justify-center shadow-xs whitespace-nowrap cursor-pointer"
+                          className="w-full bg-[#0092E1] hover:bg-[#0077B6] text-white rounded-lg text-xs font-semibold h-9 px-4 gap-2 inline-flex items-center justify-center shadow-md whitespace-nowrap cursor-pointer transition-colors"
                         >
                           <LuFileText size={14} />
                           <span>Convert to E-Prescription</span>
@@ -768,28 +753,28 @@ const DoctorDashboard = () => {
 
           {/* TAB 3: PATIENTS LIST (Fetched from MongoDB) */}
           {activeTab === "patients" && (
-            <div className="bg-white rounded-xl border border-neutral-200 p-5 sm:p-6 shadow-xs space-y-4">
+            <div className="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="text-base sm:text-lg font-bold text-neutral-900 tracking-tight">
+                  <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
                     Registered Patients
                   </h2>
-                  <p className="text-xs text-neutral-500">
+                  <p className="text-xs text-slate-500">
                     Live clinical health records in MongoDB Atlas
                   </p>
                 </div>
-                <span className="bg-neutral-100 text-neutral-700 border border-neutral-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap">
+                <span className="bg-blue-50 text-[#0091DC] border border-blue-200 rounded-full text-xs font-semibold px-3 py-1 whitespace-nowrap">
                   {patients.length} Registered
                 </span>
               </div>
 
               {loading ? (
-                <div className="p-8 text-center text-neutral-400 text-xs">
-                  <LuRefreshCw className="animate-spin inline-block mr-2" />{" "}
+                <div className="p-8 text-center text-slate-400 text-xs">
+                  <LuRefreshCw className="animate-spin inline-block mr-2 text-blue-600" />{" "}
                   Loading patients...
                 </div>
               ) : patients.length === 0 ? (
-                <div className="p-8 text-center text-neutral-400 text-xs">
+                <div className="p-8 text-center text-slate-400 text-xs">
                   No patient records found in database.
                 </div>
               ) : (
@@ -797,28 +782,28 @@ const DoctorDashboard = () => {
                   {patients.map((pat) => (
                     <div
                       key={pat.id}
-                      className="p-4 border border-neutral-200 rounded-xl bg-white shadow-xs space-y-2"
+                      className="p-4 border border-slate-200 rounded-xl bg-white shadow-sm space-y-2 hover:border-blue-200 transition-colors"
                     >
                       <div className="flex justify-between items-start">
-                        <h4 className="font-bold text-neutral-900 text-sm">
+                        <h4 className="font-bold text-slate-900 text-sm">
                           {pat.name}
                         </h4>
-                        <span className="bg-neutral-100 text-neutral-700 border border-neutral-200 rounded-md text-[11px] font-medium px-2 py-0.5">
+                        <span className="bg-blue-100 text-blue-700 font-bold text-[10px] px-2 py-0.5 rounded">
                           {pat.blood}
                         </span>
                       </div>
-                      <p className="text-xs text-neutral-500">
+                      <p className="text-xs text-slate-500">
                         {pat.age} yrs &middot; {pat.sex} &middot; {pat.phone}
                       </p>
-                      <div className="text-xs pt-1 border-t border-neutral-100">
-                        <span className="text-neutral-400">Allergies: </span>
-                        <span className="text-rose-700 font-medium">
+                      <div className="text-xs pt-1 border-t border-slate-100">
+                        <span className="text-slate-400">Allergies: </span>
+                        <span className="text-rose-600 font-semibold">
                           {pat.allergies}
                         </span>
                       </div>
                       <div className="text-xs">
-                        <span className="text-neutral-400">Chronic: </span>
-                        <span className="text-neutral-700 font-medium">
+                        <span className="text-slate-400">Chronic: </span>
+                        <span className="text-slate-700 font-medium">
                           {pat.chronic}
                         </span>
                       </div>
@@ -831,30 +816,30 @@ const DoctorDashboard = () => {
 
           {/* TAB 4: APPOINTMENTS */}
           {activeTab === "appointments" && (
-            <div className="bg-white rounded-xl border border-neutral-200 p-5 sm:p-6 shadow-xs space-y-4">
+            <div className="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="text-base sm:text-lg font-bold text-neutral-900 tracking-tight">
+                  <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
                     Clinic Scheduling Queue
                   </h2>
-                  <p className="text-xs text-neutral-500">
+                  <p className="text-xs text-slate-500">
                     Live patient appointments queue from MongoDB Atlas
                   </p>
                 </div>
-                <span className="bg-neutral-100 text-neutral-700 border border-neutral-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap">
+                <span className="bg-blue-50 text-[#0091DC] border border-blue-200 rounded-full text-xs font-semibold px-3 py-1 whitespace-nowrap">
                   {appointments.length} Total
                 </span>
               </div>
 
               {loading ? (
-                <div className="p-8 text-center text-neutral-400 text-xs">
-                  <LuRefreshCw className="animate-spin inline-block mr-2" />{" "}
+                <div className="p-8 text-center text-slate-400 text-xs">
+                  <LuRefreshCw className="animate-spin inline-block mr-2 text-blue-600" />{" "}
                   Loading schedule...
                 </div>
               ) : (
                 <div className="w-full overflow-x-auto">
                   <table className="w-full min-w-[850px] border-collapse text-left text-xs">
-                    <thead className="bg-neutral-50 text-neutral-600 text-[11px] font-semibold uppercase tracking-wider border-b border-neutral-200">
+                    <thead className="bg-slate-50 text-slate-600 text-[11px] font-semibold uppercase tracking-wider border-b border-slate-200">
                       <tr>
                         <th className="py-3 px-4">Time</th>
                         <th className="py-3 px-4">Patient Name</th>
@@ -864,35 +849,35 @@ const DoctorDashboard = () => {
                         <th className="py-3 px-4 text-right">Action</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-neutral-100 text-neutral-700">
+                    <tbody className="divide-y divide-slate-100 text-slate-700">
                       {appointments.map((apt) => (
                         <tr
                           key={apt.id}
-                          className="hover:bg-neutral-50/70 transition-colors"
+                          className="hover:bg-slate-50/80 transition-colors"
                         >
-                          <td className="py-3 px-4 font-semibold text-neutral-900 whitespace-nowrap">
+                          <td className="py-3 px-4 font-semibold text-slate-900 whitespace-nowrap">
                             {apt.time}
                           </td>
-                          <td className="py-3 px-4 font-medium text-neutral-900">
+                          <td className="py-3 px-4 font-medium text-slate-900">
                             {apt.patient}
                           </td>
                           <td className="py-3 px-4">
-                            <span className="bg-neutral-100 text-neutral-700 border border-neutral-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap">
+                            <span className="bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap">
                               {apt.type}
                             </span>
                           </td>
-                          <td className="py-3 px-4 text-neutral-600 max-w-xs truncate">
+                          <td className="py-3 px-4 text-slate-600 max-w-xs truncate">
                             {apt.reason}
                           </td>
                           <td className="py-3 px-4">
                             <span
-                              className={
+                              className={`text-xs font-semibold px-2.5 py-1 rounded-full whitespace-nowrap ${
                                 apt.status === "Completed"
-                                  ? "bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap"
+                                  ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
                                   : apt.status === "In Progress"
-                                    ? "bg-amber-50 text-amber-800 border border-amber-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap"
-                                    : "bg-neutral-100 text-neutral-700 border border-neutral-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap"
-                              }
+                                    ? "bg-amber-50 text-amber-700 border border-amber-200"
+                                    : "bg-blue-50 text-[#0091DC] border border-blue-200"
+                              }`}
                             >
                               {apt.status}
                             </span>
@@ -903,9 +888,9 @@ const DoctorDashboard = () => {
                                 setSelectedPatient(apt.patient);
                                 setShowPrescriptionModal(true);
                               }}
-                              className="h-7 px-2.5 text-xs font-medium text-neutral-700 hover:bg-neutral-100 rounded-md inline-flex items-center whitespace-nowrap cursor-pointer"
+                              className="text-xs font-bold text-[#0091DC] hover:text-[#0077B6] hover:underline cursor-pointer inline-flex items-center gap-1"
                             >
-                              Write Rx
+                              Write Rx &rarr;
                             </button>
                           </td>
                         </tr>
@@ -919,26 +904,26 @@ const DoctorDashboard = () => {
 
           {/* TAB 5: PRESCRIPTIONS */}
           {activeTab === "prescriptions" && (
-            <div className="bg-white rounded-xl border border-neutral-200 p-5 sm:p-6 shadow-xs space-y-4">
+            <div className="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="text-base sm:text-lg font-bold text-neutral-900 tracking-tight">
+                  <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
                     E-Prescription Logs
                   </h2>
-                  <p className="text-xs text-neutral-500">
+                  <p className="text-xs text-slate-500">
                     Live records synced with MongoDB Atlas
                   </p>
                 </div>
                 <button
                   onClick={() => setShowPrescriptionModal(true)}
-                  className="bg-neutral-900 hover:bg-neutral-800 text-white rounded-lg text-xs font-medium h-9 px-4 gap-2 inline-flex items-center shadow-xs whitespace-nowrap shrink-0 cursor-pointer"
+                  className="bg-[#0092E1] hover:bg-[#0077B6] text-white rounded-lg text-xs font-semibold h-9 px-4 gap-2 inline-flex items-center shadow-sm whitespace-nowrap shrink-0 cursor-pointer transition-colors"
                 >
                   + New Prescription
                 </button>
               </div>
 
               {prescriptions.length === 0 ? (
-                <div className="p-8 text-center text-neutral-400 text-xs">
+                <div className="p-8 text-center text-slate-400 text-xs">
                   No prescriptions on record.
                 </div>
               ) : (
@@ -946,25 +931,25 @@ const DoctorDashboard = () => {
                   {prescriptions.map((rx) => (
                     <div
                       key={rx.id}
-                      className="p-3.5 border border-neutral-200 rounded-xl bg-white flex items-center justify-between text-xs shadow-xs"
+                      className="p-3.5 border border-slate-200 rounded-xl bg-white flex items-center justify-between text-xs shadow-sm hover:border-blue-200 transition-colors"
                     >
                       <div className="space-y-0.5">
-                        <span className="font-mono text-neutral-400 font-semibold">
+                        <span className="font-mono text-slate-400 font-semibold">
                           {rx.id}
                         </span>
-                        <p className="font-bold text-neutral-900">
+                        <p className="font-bold text-slate-900">
                           {rx.patient}
                         </p>
-                        <p className="text-neutral-500">
+                        <p className="text-slate-500">
                           {rx.drug} &middot; Issued {rx.date}
                         </p>
                         {rx.aiExplanation && (
-                          <p className="text-neutral-600 italic mt-1">
+                          <p className="text-slate-600 italic mt-1">
                             &ldquo;{rx.aiExplanation}&rdquo;
                           </p>
                         )}
                       </div>
-                      <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-md text-[11px] font-medium px-2.5 py-1 whitespace-nowrap">
+                      <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-md text-[11px] font-semibold px-2.5 py-1 whitespace-nowrap">
                         {rx.status}
                       </span>
                     </div>
@@ -977,20 +962,20 @@ const DoctorDashboard = () => {
 
         {/* E-PRESCRIPTION MODAL */}
         {showPrescriptionModal && (
-          <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-xl max-w-lg w-full p-6 shadow-xl relative space-y-4 border border-neutral-200">
-              <div className="flex justify-between items-start border-b border-neutral-200 pb-3">
+          <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative space-y-4 border border-slate-100">
+              <div className="flex justify-between items-start border-b border-slate-100 pb-3">
                 <div>
-                  <h3 className="font-bold text-base text-neutral-900">
+                  <h3 className="font-bold text-base text-slate-900">
                     Official E-Prescription
                   </h3>
-                  <p className="text-xs text-neutral-500">
+                  <p className="text-xs text-slate-500">
                     MedFlow Certified Clinical Electronic Order
                   </p>
                 </div>
                 <button
                   onClick={() => setShowPrescriptionModal(false)}
-                  className="text-neutral-400 hover:text-neutral-600 p-1 cursor-pointer"
+                  className="text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
                 >
                   <LuX size={18} />
                 </button>
@@ -998,13 +983,13 @@ const DoctorDashboard = () => {
 
               {rxSuccess ? (
                 <div className="text-center py-6 space-y-3">
-                  <div className="w-10 h-10 bg-emerald-50 border border-emerald-200 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
-                    <FaCircleCheck size={22} />
+                  <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
+                    <FaCircleCheck size={26} />
                   </div>
-                  <h4 className="font-bold text-base text-neutral-900">
+                  <h4 className="font-bold text-base text-slate-900">
                     Prescription Saved to MongoDB
                   </h4>
-                  <p className="text-xs text-neutral-500 max-w-xs mx-auto">
+                  <p className="text-xs text-slate-500 max-w-xs mx-auto">
                     Synced to MongoDB Atlas and forwarded to MedFlow Patient
                     Portal.
                   </p>
@@ -1013,7 +998,7 @@ const DoctorDashboard = () => {
                       setRxSuccess(false);
                       setShowPrescriptionModal(false);
                     }}
-                    className="bg-neutral-900 hover:bg-neutral-800 text-white rounded-lg text-xs font-medium h-9 px-4 inline-flex items-center shadow-xs cursor-pointer"
+                    className="bg-[#0B2545] hover:bg-[#134375] text-white rounded-lg text-xs font-semibold h-9 px-4 inline-flex items-center shadow-sm cursor-pointer transition-colors"
                   >
                     Close
                   </button>
@@ -1021,38 +1006,38 @@ const DoctorDashboard = () => {
               ) : (
                 <div className="space-y-3 text-xs">
                   <div>
-                    <label className="font-semibold text-neutral-700 uppercase tracking-wider text-[11px]">
+                    <label className="font-bold text-slate-700 uppercase tracking-wider text-[11px]">
                       Patient
                     </label>
                     <input
                       type="text"
                       value={selectedPatient}
                       onChange={(e) => setSelectedPatient(e.target.value)}
-                      className="w-full mt-1 p-2 bg-neutral-50 border border-neutral-200 rounded-lg text-neutral-800 font-medium text-xs"
+                      className="w-full mt-1 p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 font-medium text-xs focus:ring-2 focus:ring-[#0092E1] outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="font-semibold text-neutral-700 uppercase tracking-wider text-[11px]">
+                    <label className="font-bold text-slate-700 uppercase tracking-wider text-[11px]">
                       Prescribed Medication & Dosage
                     </label>
                     <input
                       type="text"
                       value={medicationInput}
                       onChange={(e) => setMedicationInput(e.target.value)}
-                      className="w-full mt-1 p-2 border border-neutral-300 rounded-lg text-xs"
+                      className="w-full mt-1 p-2 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-[#0092E1] outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="font-semibold text-neutral-700 uppercase tracking-wider text-[11px]">
+                    <label className="font-bold text-slate-700 uppercase tracking-wider text-[11px]">
                       Plain-Language Patient AI Explanation
                     </label>
                     <textarea
                       rows={3}
                       value={explanationInput}
                       onChange={(e) => setExplanationInput(e.target.value)}
-                      className="w-full mt-1 p-2 border border-neutral-300 rounded-lg text-xs"
+                      className="w-full mt-1 p-2 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-[#0092E1] outline-none"
                     />
                   </div>
 
@@ -1060,7 +1045,7 @@ const DoctorDashboard = () => {
                     <button
                       type="button"
                       onClick={() => setShowPrescriptionModal(false)}
-                      className="bg-white hover:bg-neutral-50 text-neutral-700 border border-neutral-200 rounded-lg text-xs font-medium h-9 px-3.5 inline-flex items-center shadow-xs cursor-pointer"
+                      className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-lg text-xs font-semibold h-9 px-3.5 inline-flex items-center shadow-xs cursor-pointer"
                     >
                       Cancel
                     </button>
@@ -1068,7 +1053,7 @@ const DoctorDashboard = () => {
                       type="button"
                       disabled={isSubmittingRx}
                       onClick={handleSavePrescription}
-                      className="bg-neutral-900 hover:bg-neutral-800 text-white rounded-lg text-xs font-medium h-9 px-4 gap-2 inline-flex items-center shadow-xs disabled:opacity-60 cursor-pointer"
+                      className="bg-[#0092E1] hover:bg-[#0077B6] text-white rounded-lg text-xs font-semibold h-9 px-4 gap-2 inline-flex items-center shadow-md disabled:opacity-60 cursor-pointer transition-colors"
                     >
                       <LuPrinter size={14} />
                       <span>

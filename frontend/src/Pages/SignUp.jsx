@@ -96,32 +96,32 @@ export default function SignupPage() {
 
   return (
     <div className="flex min-h-screen w-full font-sans antialiased bg-white select-none">
-      {/* LEFT PANEL: Neutral Dark Enterprise Branding */}
-      <div className="hidden md:flex flex-col justify-between w-[45%] bg-neutral-900 border-r border-neutral-800 p-12 lg:p-16 text-white relative overflow-hidden">
+      {/* LEFT PANEL: Signature Medical Navy Branding */}
+      <div className="hidden md:flex flex-col justify-between w-[45%] bg-[#0B2545] p-12 lg:p-16 text-white relative overflow-hidden">
         {/* App Branding */}
         <div className="flex items-center gap-3 z-10">
           <NavLink to="/" className="flex items-center gap-3 text-white">
-            <div className="bg-neutral-800 border border-neutral-700 text-white p-2.5 rounded-lg flex items-center justify-center shadow-xs">
-              <LuStethoscope size={20} />
+            <div className="bg-[#0092E1] text-white p-2.5 rounded-xl flex items-center justify-center shadow-md">
+              <LuStethoscope size={22} />
             </div>
-            <span className="text-xl font-bold tracking-tight">MedFlow</span>
+            <span className="text-2xl font-bold tracking-tight">MedFlow</span>
           </NavLink>
         </div>
 
         {/* Dynamic Typography Value Proposition */}
         <div className="max-w-md space-y-4 z-10">
-          <h1 className="text-3xl lg:text-4xl font-bold leading-tight tracking-tight text-white">
+          <h1 className="text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight text-white">
             The modern OS <br />
             for small clinics.
           </h1>
-          <p className="text-neutral-400 text-sm leading-relaxed max-w-[90%]">
+          <p className="text-slate-300 text-sm leading-relaxed max-w-[90%]">
             Digital records, smart scheduling, and clinical AI assistance that respects
             clinical judgment.
           </p>
         </div>
 
         {/* Alignment anchor bottom container node */}
-        <div className="text-xs text-neutral-500 font-normal z-10">
+        <div className="text-xs text-slate-400 font-normal z-10">
           &copy; {new Date().getFullYear()} MedFlow Inc. All rights reserved.
         </div>
       </div>
@@ -130,10 +130,10 @@ export default function SignupPage() {
       <div className="flex-1 flex flex-col justify-center items-center px-6 py-12 sm:px-12 md:px-16 lg:px-24 bg-white">
         {/* Header container for mobile alignment */}
         <div className="w-full max-w-md md:hidden flex items-center gap-2.5 mb-8 self-start">
-          <div className="bg-neutral-900 text-white p-2 rounded-lg flex items-center justify-center">
-            <LuStethoscope size={18} />
+          <div className="bg-[#0092E1] text-white p-2 rounded-lg flex items-center justify-center shadow-sm">
+            <LuStethoscope size={20} />
           </div>
-          <span className="text-lg font-bold text-neutral-900 tracking-tight">
+          <span className="text-xl font-bold text-[#0B2545] tracking-tight">
             MedFlow
           </span>
         </div>
@@ -145,19 +145,19 @@ export default function SignupPage() {
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 mb-2">
                 <FaCircleCheck size={28} />
               </div>
-              <h2 className="text-xl font-bold text-neutral-900">
+              <h2 className="text-xl font-bold text-[#0B2545]">
                 Welcome to MedFlow!
               </h2>
-              <p className="text-neutral-500 text-xs max-w-xs mx-auto">
+              <p className="text-slate-500 text-xs max-w-xs mx-auto">
                 Your profile as a{" "}
-                <span className="font-semibold text-neutral-900">
+                <span className="font-semibold text-[#0B2545]">
                   {formData.role}
                 </span>{" "}
                 has been configured.
               </p>
               <button
                 onClick={() => setIsSuccess(false)}
-                className="text-xs font-semibold text-neutral-900 hover:underline cursor-pointer"
+                className="text-xs font-semibold text-[#0091DC] hover:underline cursor-pointer"
               >
                 Reset form demo
               </button>
@@ -166,18 +166,18 @@ export default function SignupPage() {
             <>
               {/* Intent Header */}
               <div className="space-y-1">
-                <h2 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B2545] tracking-tight">
                   Create your account
                 </h2>
-                <p className="text-neutral-500 text-xs">
+                <p className="text-slate-500 text-xs">
                   Join your clinic in seconds with cloud sync
                 </p>
               </div>
 
               {/* API Error Notification */}
               {apiError && (
-                <div className="p-3 bg-neutral-100 border border-neutral-300 rounded-lg text-neutral-800 text-xs flex items-center gap-2">
-                  <LuTriangleAlert size={16} className="text-neutral-600 shrink-0" />
+                <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-rose-800 text-xs flex items-center gap-2">
+                  <LuTriangleAlert size={16} className="text-rose-600 shrink-0" />
                   <span>{apiError}</span>
                 </div>
               )}
@@ -187,7 +187,7 @@ export default function SignupPage() {
                 {/* Full Name */}
                 <div className="space-y-1">
                   <label
-                    className="text-[11px] font-semibold text-neutral-700 uppercase tracking-wider"
+                    className="text-xs font-semibold text-slate-700 uppercase tracking-wider"
                     htmlFor="name"
                   >
                     Full name
@@ -197,11 +197,11 @@ export default function SignupPage() {
                     type="text"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full px-3.5 py-2.5 rounded-lg border text-xs text-neutral-900 bg-white transition-all outline-none
+                    className={`w-full px-3.5 py-2.5 rounded-lg border text-xs text-slate-900 bg-white transition-all outline-none
                       ${
                         errors.name
                           ? "border-rose-400 focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
-                          : "border-neutral-300 focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900"
+                          : "border-slate-300 focus:border-[#0091DC] focus:ring-2 focus:ring-[#0091DC]"
                       }`}
                     placeholder="Dr. John Doe"
                   />
@@ -215,7 +215,7 @@ export default function SignupPage() {
                 {/* Email Address */}
                 <div className="space-y-1">
                   <label
-                    className="text-[11px] font-semibold text-neutral-700 uppercase tracking-wider"
+                    className="text-xs font-semibold text-slate-700 uppercase tracking-wider"
                     htmlFor="email"
                   >
                     Email
@@ -225,11 +225,11 @@ export default function SignupPage() {
                     type="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-3.5 py-2.5 rounded-lg border text-xs text-neutral-900 bg-white transition-all outline-none
+                    className={`w-full px-3.5 py-2.5 rounded-lg border text-xs text-slate-900 bg-white transition-all outline-none
                       ${
                         errors.email
                           ? "border-rose-400 focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
-                          : "border-neutral-300 focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900"
+                          : "border-slate-300 focus:border-[#0091DC] focus:ring-2 focus:ring-[#0091DC]"
                       }`}
                     placeholder="name@clinic.com"
                   />
@@ -243,7 +243,7 @@ export default function SignupPage() {
                 {/* Password Input */}
                 <div className="space-y-1">
                   <label
-                    className="text-[11px] font-semibold text-neutral-700 uppercase tracking-wider"
+                    className="text-xs font-semibold text-slate-700 uppercase tracking-wider"
                     htmlFor="password"
                   >
                     Password
@@ -254,18 +254,18 @@ export default function SignupPage() {
                       type={showPassword ? "text" : "password"}
                       value={formData.password}
                       onChange={handleChange}
-                      className={`w-full pl-3.5 pr-10 py-2.5 rounded-lg border text-xs text-neutral-900 bg-white transition-all outline-none
+                      className={`w-full pl-3.5 pr-10 py-2.5 rounded-lg border text-xs text-slate-900 bg-white transition-all outline-none
                         ${
                           errors.password
                             ? "border-rose-400 focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
-                            : "border-neutral-300 focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900"
+                            : "border-slate-300 focus:border-[#0091DC] focus:ring-2 focus:ring-[#0091DC]"
                         }`}
                       placeholder="••••••••"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 transition-colors focus:outline-none cursor-pointer"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors focus:outline-none cursor-pointer"
                     >
                       {showPassword ? (
                         <FaRegEyeSlash size={16} />
@@ -284,7 +284,7 @@ export default function SignupPage() {
                 {/* Role dropdown */}
                 <div className="space-y-1">
                   <label
-                    className="text-[11px] font-semibold text-neutral-700 uppercase tracking-wider"
+                    className="text-xs font-semibold text-slate-700 uppercase tracking-wider"
                     htmlFor="role"
                   >
                     I am a
@@ -294,13 +294,13 @@ export default function SignupPage() {
                       id="role"
                       value={formData.role}
                       onChange={handleChange}
-                      className="w-full appearance-none px-3.5 py-2.5 rounded-lg border border-neutral-300 bg-white text-xs text-neutral-900 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-all cursor-pointer"
+                      className="w-full appearance-none px-3.5 py-2.5 rounded-lg border border-slate-300 bg-white text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0091DC] transition-all cursor-pointer"
                     >
                       <option value="Patient">Patient</option>
                       <option value="Doctor">Doctor</option>
                       <option value="Clinic Manager">Clinic Manager</option>
                     </select>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-400">
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
                       <svg
                         className="fill-current h-4 w-4"
                         xmlns="http://www.w3.org/2000/svg"
@@ -316,7 +316,7 @@ export default function SignupPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full !mt-5 py-2.5 px-4 rounded-lg bg-neutral-900 hover:bg-neutral-800 disabled:bg-neutral-700 text-white font-medium shadow-xs transition-colors text-xs flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full !mt-5 py-2.5 px-4 rounded-lg bg-[#0091DC] hover:bg-[#0077B6] disabled:bg-blue-300 text-white font-semibold shadow-sm transition-colors text-xs flex items-center justify-center gap-2 cursor-pointer focus:ring-2 focus:ring-blue-400"
                 >
                   {isLoading ? (
                     <>
@@ -330,11 +330,11 @@ export default function SignupPage() {
               </form>
 
               {/* Sign in link */}
-              <div className="text-center text-xs text-neutral-500 font-normal pt-1">
+              <div className="text-center text-xs text-slate-500 font-normal pt-1">
                 Already have an account?{" "}
                 <NavLink
                   to="/login"
-                  className="text-neutral-900 hover:underline font-semibold transition-all"
+                  className="text-[#0091DC] hover:underline font-semibold transition-all"
                 >
                   Sign in
                 </NavLink>
